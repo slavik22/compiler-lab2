@@ -129,6 +129,7 @@ expr: stringExpr { $$ = $1; }
    | forExpr { $$ = $1; }
    | breakExpr { $$ = $1; }
    | letExpr { $$ = $1; }
+   | intExpr { $$ = $1; }
 ;
 
 varDecl: VAR ID typeannotation ASSIGN expr
