@@ -25,8 +25,6 @@ class ASTDumper : public ConstASTVisitor {
 public:
   int32_t result;
 
-  ASTEvaluator() : result(0) {}
-
   ASTDumper(std::ostream *_ostream, bool _verbose)
       : ostream(_ostream), verbose(_verbose) {}
   void nl() {
