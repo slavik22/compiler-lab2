@@ -46,10 +46,6 @@ public:
   virtual void visit(const ForLoop &);
   virtual void visit(const Break &);
   virtual void visit(const Assign &);
-  int32_t evaluate(const Expr &expr) {
-        expr.accept(*this);
-        return result;
-    }
 };
 
 } // namespace ast
