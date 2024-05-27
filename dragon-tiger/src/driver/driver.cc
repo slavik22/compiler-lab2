@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
   }
 
   if (vm.count("eval")) {
-    ast::ASTEvaluator evaluator;
+    ast::ASTDumper evaluator;
     try {
       int32_t result = parser_driver.result_ast->accept(evaluator);
       std::cout << result << std::endl;
