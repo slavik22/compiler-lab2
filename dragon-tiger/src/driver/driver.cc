@@ -2,7 +2,6 @@
 #include <iostream>
 
 #include "../ast/ast_dumper.hh"
-// #include "../parser/parser_driver.hh"
 #include "../utils/errors.hh"
 
 int main(int argc, char **argv) {
@@ -15,7 +14,6 @@ int main(int argc, char **argv) {
   ("trace-parser", "enable parser traces")
   ("trace-lexer", "enable lexer traces")
   ("verbose,v", "be verbose")
-  ("eval,e", "evaluate the parsed AST")  // Add eval option
   ("input-file", po::value(&input_files), "input Tiger file");
 
   po::positional_options_description positional;
