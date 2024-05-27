@@ -24,8 +24,7 @@ static std::string string_buffer;
 lineterminator  \r|\n|\r\n
 blank           [ \t\f]
 id              [a-zA-Z][_0-9a-zA-Z]*
-int             [1-9][0-9]*
-zero            0            
+int             [0-9]+        
 
  /* Declare two start conditions (sub-automate states) to handle
     strings and comments */
@@ -90,8 +89,7 @@ var      return yy::tiger_parser::make_VAR(loc);
 {id}       return yy::tiger_parser::make_ID(Symbol(yytext), loc);
 
  /* Integers */
- {zero}     return yy::tiger_parser::make_INT(0, loc);
-{integer} {
+{int} {
     errno = 0;
     long val = strtol(yytext, NULL, 10);
     if (errno != 0 || val > TIGER_INT_MAX) {
