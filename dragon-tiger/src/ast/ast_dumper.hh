@@ -23,8 +23,6 @@ class ASTDumper : public ConstASTVisitor {
   };
 
 public:
-  int32_t result;
-
   ASTDumper(std::ostream *_ostream, bool _verbose)
       : ostream(_ostream), verbose(_verbose) {}
   void nl() {
@@ -32,20 +30,20 @@ public:
     for (unsigned i = 0; i < indent_level; i++)
       *ostream << "  ";
   };
-  virtual void visit(const IntegerLiteral &);
-  virtual void visit(const StringLiteral &);
-  virtual void visit(const BinaryOperator &);
-  virtual void visit(const Sequence &);
-  virtual void visit(const Let &);
-  virtual void visit(const Identifier &);
-  virtual void visit(const IfThenElse &);
-  virtual void visit(const VarDecl &);
-  virtual void visit(const FunDecl &);
-  virtual void visit(const FunCall &);
-  virtual void visit(const WhileLoop &);
-  virtual void visit(const ForLoop &);
-  virtual void visit(const Break &);
-  virtual void visit(const Assign &);
+  void visit(const IntegerLiteral &);
+  void visit(const StringLiteral &);
+  void visit(const BinaryOperator &);
+  void visit(const Sequence &);
+  void visit(const Let &);
+  void visit(const Identifier &);
+  void visit(const IfThenElse &);
+  void visit(const VarDecl &);
+  void visit(const FunDecl &);
+  void visit(const FunCall &);
+  void visit(const WhileLoop &);
+  void visit(const ForLoop &);
+  void visit(const Break &);
+  void visit(const Assign &);
 };
 
 } // namespace ast
