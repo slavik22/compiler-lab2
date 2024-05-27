@@ -91,7 +91,7 @@ using utils::nl;
 %type <Decl *> decl funcDecl varDecl;
 %type <std::vector<Decl *>> decls;
 %type <Expr *> expr stringExpr seqExpr callExpr opExpr negExpr
-            assignExpr whileExpr forExpr breakExpr letExpr var intExpr;
+            assignExpr whileExpr forExpr breakExpr letExpr var intExpr ifExpr;
 
 %type <std::vector<Expr *>> exprs nonemptyexprs;
 %type <std::vector<Expr *>> arguments nonemptyarguments;
