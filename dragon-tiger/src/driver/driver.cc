@@ -1,7 +1,6 @@
 #include <boost/program_options.hpp>
 #include <iostream>
 
-#include "../ast/ast_evaluator.hh"
 #include "../ast/ast_dumper.hh"
 #include "../parser/parser_driver.hh"
 #include "../utils/errors.hh"
@@ -46,7 +45,7 @@ int main(int argc, char **argv) {
   }
 
   if (vm.count("eval")) {
-    ast::ASTEvaluator evaluator;
+    ast::ASTDumper evaluator;
     try {
       int32_t result = evaluator.evaluate(*parser_driver.result_ast);
       std::cout << result << std::endl;
