@@ -105,7 +105,9 @@ using utils::nl;
 // Declare precedence rules
 
 %nonassoc FUNCTION VAR TYPE DO OF ASSIGN;
-%left UMINUS;
+%left PLUS MINUS;  // Addition and subtraction (left associative)
+%left TIMES DIVIDE;  // Multiplication and division (left associative)
+%left UMINUS;  // Unary minus has higher precedence than binary operators
 
 // Declare grammar rules and production actions
 
