@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "../ast/ast_dumper.hh"
-#include "../parser/parser_driver.hh"
+// #include "../parser/parser_driver.hh"
 #include "../utils/errors.hh"
 
 int main(int argc, char **argv) {
@@ -42,17 +42,6 @@ int main(int argc, char **argv) {
 
   if (!parser_driver.parse(input_files[0])) {
     utils::error("parser failed");
-  }
-
-  if (vm.count("eval")) {
-    ast::ASTDumper evaluator;
-    try {
-      int32_t result = evaluator.evaluate(*parser_driver.result_ast);
-      std::cout << result << std::endl;
-    } catch (const std::exception &e) {
-      std::cerr << "Error during evaluation: " << e.what() << std::endl;
-      return 1;
-    }
   }
 
   if (vm.count("dump-ast")) {
