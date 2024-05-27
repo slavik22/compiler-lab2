@@ -1,7 +1,7 @@
 #include <boost/program_options.hpp>
 #include <iostream>
 
-#include "../ast/ast_dumper.hh"
+#include "../ast/ast_evaluator.hh"
 #include "../parser/parser_driver.hh"
 #include "../utils/errors.hh"
 
