@@ -26,6 +26,10 @@ public:
   ASTDumper() : result(0) {}
   int32_t getResult() const { return result; }
 
+  void evaluate(const Expr &expr) {
+        expr.accept(*this);
+  }
+
   ASTDumper(std::ostream *_ostream, bool _verbose)
       : ostream(_ostream), verbose(_verbose) {}
   void nl() {
