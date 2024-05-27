@@ -15,6 +15,7 @@ int main(int argc, char **argv) {
   ("trace-parser", "enable parser traces")
   ("trace-lexer", "enable lexer traces")
   ("verbose,v", "be verbose")
+  ("eval,e", "evaluate the parsed AST")  // Add eval option
   ("input-file", po::value(&input_files), "input Tiger file");
 
   po::positional_options_description positional;
@@ -41,6 +42,17 @@ int main(int argc, char **argv) {
 
   if (!parser_driver.parse(input_files[0])) {
     utils::error("parser failed");
+  }
+
+  if (vm.count("eval")) {
+    ast::ASTEvaluator evaluator;
+    try {
+      int result = parser_driver.result_ast->accept(evaluator);
+      std::cout << result << std::endl;
+    } catch (const std::exception &e) {
+      std::cerr << "Error during evaluation: " << e.what() << std::endl;
+      return 1;
+    }
   }
 
   if (vm.count("dump-ast")) {
