@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "../ast/ast_dumper.hh"
+#include "../parser/parser_driver.hh"
 #include "../utils/errors.hh"
 
 int main(int argc, char **argv) {

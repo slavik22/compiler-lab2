@@ -62,11 +62,11 @@ void ASTDumper::visit(const StringLiteral &literal) {
 }
 
 void ASTDumper::visit(const BinaryOperator &binop) {
-    *ostream << '(';
-    binop.get_left().accept(*this);
-    *ostream << operator_name[binop.op];
-    binop.get_right().accept(*this);
-    *ostream << ')';
+  *ostream << '(';
+  binop.get_left().accept(*this);
+  *ostream << operator_name[binop.op];
+  binop.get_right().accept(*this);
+  *ostream << ')';
 }
 
 void ASTDumper::visit(const Sequence &seqExpr) {
