@@ -28,11 +28,6 @@ public:
     int32_t visit(const Break &);
     int32_t visit(const Assign &);
 
-    // Default handler for other nodes
-    void visit(const Node &) override {
-        utils::error("Evaluation error: Unsupported AST node.");
-    }
-
     int32_t evaluate(const Expr &expr) {
         expr.accept(*this);
         return result;
