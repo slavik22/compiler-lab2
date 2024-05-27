@@ -44,6 +44,12 @@ public:
   virtual void visit(const ForLoop &);
   virtual void visit(const Break &);
   virtual void visit(const Assign &);
+
+  // Default handler for other nodes
+    virtual int visit(const Node &) {
+        utils::error("Evaluation error: Unsupported AST node.");
+        return 0;
+    }
 };
 
 } // namespace ast
