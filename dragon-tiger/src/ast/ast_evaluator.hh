@@ -12,21 +12,21 @@ public:
 
     ASTEvaluator() : result(0) {} // Initialize result to 0
 
-    int32_t visit(const IntegerLiteral &);
-    int32_t visit(const BinaryOperator &);
-    int32_t visit(const Sequence &);
-    int32_t visit(const IfThenElse &);
+    virtual int32_t visit(const IntegerLiteral &);
+    virtual int32_t visit(const BinaryOperator &);
+    virtual int32_t visit(const Sequence &);
+    virtual int32_t visit(const IfThenElse &);
 
-    int32_t visit(const StringLiteral &);
-    int32_t visit(const Let &);
-    int32_t visit(const Identifier &);
-    int32_t visit(const VarDecl &);
-    int32_t visit(const FunDecl &);
-    int32_t visit(const FunCall &);
-    int32_t visit(const WhileLoop &);
-    int32_t visit(const ForLoop &);
-    int32_t visit(const Break &);
-    int32_t visit(const Assign &);
+    virtual int32_t visit(const StringLiteral &);
+    virtual int32_t visit(const Let &);
+    virtual int32_t visit(const Identifier &);
+    virtual int32_t visit(const VarDecl &);
+    virtual int32_t visit(const FunDecl &);
+    virtual int32_t visit(const FunCall &);
+    virtual int32_t visit(const WhileLoop &);
+    virtual int32_t visit(const ForLoop &);
+    virtual int32_t visit(const Break &);
+    virtual int32_t visit(const Assign &);
 
     int32_t evaluate(const Expr &expr) {
         expr.accept(*this);
