@@ -62,66 +62,14 @@ void ASTDumper::visit(const StringLiteral &literal) {
 }
 
 void ASTDumper::visit(const BinaryOperator &binop) {
-
-    // *ostream << '(';
-    // binop.get_left().accept(*this);
-    // *ostream << operator_name[binop.op];
-    // binop.get_right().accept(*this);
-    // *ostream << ')';
-
-binop.get_left().accept(*this);
-    int32_t left = result;
+    *ostream << '(';
+    binop.get_left().accept(*this);
+    *ostream << operator_name[binop.op];
     binop.get_right().accept(*this);
-    int32_t right = result;
-
-    switch (binop.op) {
-        case o_plus:
-            result = left + right;
-            break;
-        case o_minus:
-            result = left - right;
-            break;
-        case o_times:
-            result = left * right;
-            break;
-        case o_divide:
-            if (right == 0) {
-                utils::error("Division by zero.");
-            }
-            result = left / right;
-            break;
-        case o_eq:
-            result = left == right;
-            break;
-        case o_neq:
-            result = left != right;
-            break;
-        case o_lt:
-            result = left < right;
-            break;
-        case o_le:
-            result = left <= right;
-            break;
-        case o_gt:
-            result = left > right;
-            break;
-        case o_ge:
-            result = left >= right;
-            break;
-        default:
-            utils::error("Unknown binary operator.");
-    }
+    *ostream << ')';
 }
 
 void ASTDumper::visit(const Sequence &seqExpr) {
-  // const auto &exprs = seqExpr.get_exprs();
-  //   if (exprs.empty()) {
-  //       utils::error("Evaluation error: Empty sequence.");
-  //   }
-
-  //   for (const auto &expr : exprs) {
-  //       expr->accept(*this);
-  //   }
   *ostream << "(";
   inc();
   const auto exprs = seqExpr.get_exprs();
@@ -169,31 +117,18 @@ void ASTDumper::visit(const Identifier &id) {
 }
 
 void ASTDumper::visit(const IfThenElse &ite) {
-  // *ostream << "if ";
-  // inl();
-  // ite.get_condition().accept(*this);
-  // dnl();
-  // *ostream << " then ";
-  // inl();
-  // ite.get_then_part().accept(*this);
-  // dnl();
-  // *ostream << " else ";
-  // inl();
-  // ite.get_else_part().accept(*this);
-  // dec();
-
-  // int condition = ite.get_condition().accept(*this);
-  //   if (condition) {
-  //       return ite.get_then_part().accept(*this);
-  //   } else {
-  //       return ite.get_else_part().accept(*this);
-  //   }
+  *ostream << "if ";
+  inl();
   ite.get_condition().accept(*this);
-    if (result) {
-        ite.get_then_part().accept(*this);
-    } else {
-        ite.get_else_part().accept(*this);
-    }
+  dnl();
+  *ostream << " then ";
+  inl();
+  ite.get_then_part().accept(*this);
+  dnl();
+  *ostream << " else ";
+  inl();
+  ite.get_else_part().accept(*this);
+  dec();
 }
 
 void ASTDumper::visit(const VarDecl &decl) {
