@@ -114,25 +114,25 @@ binop.get_left().accept(*this);
 }
 
 void ASTDumper::visit(const Sequence &seqExpr) {
-  const auto &exprs = seq.get_exprs();
-    if (exprs.empty()) {
-        utils::error("Evaluation error: Empty sequence.");
-    }
+  // const auto &exprs = seqExpr.get_exprs();
+  //   if (exprs.empty()) {
+  //       utils::error("Evaluation error: Empty sequence.");
+  //   }
 
-    for (const auto &expr : exprs) {
-        expr->accept(*this);
-    }
-  // *ostream << "(";
-  // inc();
-  // const auto exprs = seqExpr.get_exprs();
-  // for (auto expr = exprs.cbegin(); expr != exprs.cend(); expr++) {
-  //   if (expr != exprs.cbegin())
-  //     *ostream << ';';
-  //   nl();
-  //   (*expr)->accept(*this);
-  // }
-  // dnl();
-  // *ostream << ")";
+  //   for (const auto &expr : exprs) {
+  //       expr->accept(*this);
+  //   }
+  *ostream << "(";
+  inc();
+  const auto exprs = seqExpr.get_exprs();
+  for (auto expr = exprs.cbegin(); expr != exprs.cend(); expr++) {
+    if (expr != exprs.cbegin())
+      *ostream << ';';
+    nl();
+    (*expr)->accept(*this);
+  }
+  dnl();
+  *ostream << ")";
 }
 
 void ASTDumper::visit(const Let &let) {
