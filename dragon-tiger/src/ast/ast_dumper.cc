@@ -63,59 +63,65 @@ void ASTDumper::visit(const StringLiteral &literal) {
 
 void ASTDumper::visit(const BinaryOperator &binop) {
 
-
-    int left = binop.get_left().accept(*this);
-    int right = binop.get_right().accept(*this);
-
     // *ostream << '(';
     // binop.get_left().accept(*this);
     // *ostream << operator_name[binop.op];
     // binop.get_right().accept(*this);
     // *ostream << ')';
 
+binop.get_left().accept(*this);
+    int32_t left = result;
+    binop.get_right().accept(*this);
+    int32_t right = result;
+
     switch (binop.op) {
         case o_plus:
-            return left + right;
+            result = left + right;
+            break;
         case o_minus:
-            return left - right;
+            result = left - right;
+            break;
         case o_times:
-            return left * right;
+            result = left * right;
+            break;
         case o_divide:
             if (right == 0) {
                 utils::error("Division by zero.");
             }
-            return left / right;
+            result = left / right;
+            break;
         case o_eq:
-            return left == right;
+            result = left == right;
+            break;
         case o_neq:
-            return left != right;
+            result = left != right;
+            break;
         case o_lt:
-            return left < right;
+            result = left < right;
+            break;
         case o_le:
-            return left <= right;
+            result = left <= right;
+            break;
         case o_gt:
-            return left > right;
+            result = left > right;
+            break;
         case o_ge:
-            return left >= right;
+            result = left >= right;
+            break;
         default:
             utils::error("Unknown binary operator.");
-            return 0; // This will never be reached
-
-
-
+    }
 }
 
 void ASTDumper::visit(const Sequence &seqExpr) {
-  onst auto &exprs = seq.get_exprs();
+  const auto &exprs = seq.get_exprs();
     if (exprs.empty()) {
         utils::error("Evaluation error: Empty sequence.");
     }
 
-    int result = 0;
     for (const auto &expr : exprs) {
-        result = expr->accept(*this);
+        expr->accept(*this);
     }
-    return result;
   // *ostream << "(";
   // inc();
   // const auto exprs = seqExpr.get_exprs();
@@ -163,24 +169,30 @@ void ASTDumper::visit(const Identifier &id) {
 }
 
 void ASTDumper::visit(const IfThenElse &ite) {
-  *ostream << "if ";
-  inl();
-  ite.get_condition().accept(*this);
-  dnl();
-  *ostream << " then ";
-  inl();
-  ite.get_then_part().accept(*this);
-  dnl();
-  *ostream << " else ";
-  inl();
-  ite.get_else_part().accept(*this);
-  dec();
+  // *ostream << "if ";
+  // inl();
+  // ite.get_condition().accept(*this);
+  // dnl();
+  // *ostream << " then ";
+  // inl();
+  // ite.get_then_part().accept(*this);
+  // dnl();
+  // *ostream << " else ";
+  // inl();
+  // ite.get_else_part().accept(*this);
+  // dec();
 
-  int condition = ite.get_condition().accept(*this);
-    if (condition) {
-        return ite.get_then_part().accept(*this);
+  // int condition = ite.get_condition().accept(*this);
+  //   if (condition) {
+  //       return ite.get_then_part().accept(*this);
+  //   } else {
+  //       return ite.get_else_part().accept(*this);
+  //   }
+  ite.get_condition().accept(*this);
+    if (result) {
+        ite.get_then_part().accept(*this);
     } else {
-        return ite.get_else_part().accept(*this);
+        ite.get_else_part().accept(*this);
     }
 }
 
